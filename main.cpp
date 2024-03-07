@@ -1,26 +1,6 @@
-#include<bits/stdc++.h>
-#define Lumino iostream::\
-sync_with_stdio(false);\
-cin.tie(nullptr);\
-cout.tie(nullptr);
-#define ll long long
-#define endl "\n"
-#define all(v) (v.begin(),v.end())
-
+#include <bits/stdc++.h>
 using namespace std;
 
-ll pow(ll n , ll i);
-
-ll min(ll n , ll x );
-
-ll max(ll n , ll x );
-
-void omar(){
-//#ifdef Clion
-//    freopen("input.txt", "r",stdin);
-//    freopen("output.txt", "w", stdout);
-//#endif
-}
 int int_ord(char chr){
     return int(chr-'A');
 }
@@ -77,12 +57,14 @@ int digits_chk(string num){
     return number ;
 }
 
-void solve() {
+
+int main()
+{
     while(true){
-    cout << "================== AFFINE CIPHER ==================\n" ;
-    cout << "1 - START THE PROGRAM .\n";
-    cout << "2 - EXIT THE PROGRAM .\n";
-    cout << "ENTER YOUR CHOICE : ";
+        cout << "================== AFFINE CIPHER ==================\n" ;
+        cout << "1 - START THE PROGRAM .\n";
+        cout << "2 - EXIT THE PROGRAM .\n";
+        cout << "ENTER YOUR CHOICE : ";
         string temp_choice_1;
         cin >> temp_choice_1;
         while(!int_chk(temp_choice_1)){
@@ -104,40 +86,42 @@ void solve() {
             }
             int choice_2 = stoi(temp_choice_2);
             if (choice_2 == 3) continue ;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "ENTER YOUR TEXT : " ;
-            string text , ans ; getline(cin, text);
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            string text , ans ;
+            cin.ignore() ;
+            getline(cin, text);
             text = str_chk(text);
-            for(char &i : text) i = toupper(i);
+            bool flag = true ;
+            for(char &i : text) {
+                if (islower(i))flag = false ;
+                i = toupper(i);
+            }
             string temp_a , temp_b, temp_c ;
             cout << "ENTER LETTER a IN THE FUNCTION : ";
             cin >> temp_a ;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             int a = digits_chk(temp_a) ;
             cout << "ENTER LETTER b IN THE FUNCTION : ";
             cin >> temp_b ;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             int b = digits_chk(temp_b) ;
             cout << "ENTER LETTER c IN THE FUNCTION : ";
             cin >> temp_c ;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             int c = digits_chk(temp_c) ;
             if(choice_2 == 1){
                 for(char i : text){
                     ans += encrypt(i, a , b) ;
                 }
+                if(!flag)for (auto& i : ans) {
+                        i = tolower(i);
+                    }
                 cout << "Encrypted Text --->> " << ans << "\n" ;
             }
             else if (choice_2 == 2){
                 for(char i : text){
                     ans += decrypt(i, c , b) ;
                 }
+                if(!flag)for (auto& i : ans) {
+                        i = tolower(i);
+                    }
                 cout << "Decrypted Text --->> " << ans << "\n" ;
             }
         }
@@ -145,24 +129,3 @@ void solve() {
 
 }
 
-int main(){
-    omar();
-//    Lumino
-    ll t = 1 ;
-//    cin >> t ;
-    while(t--)solve();
-}
-ll pow(ll n , ll i){
-    if(i == 0)return 1 ;
-    return pow(n,i-1)*n ;
-}
-
-ll min(ll n , ll x ){
-    if( n >= x )return x ;
-    else return n ;
-}
-
-ll max(ll n , ll x ){
-    if( n <= x )return x ;
-    else return n ;
-}
