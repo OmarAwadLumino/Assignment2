@@ -18,7 +18,7 @@ char decrypt(char chr, int c, int b){
 bool int_chk(string x ){
     if(x.length()>1)return false ;
     else{
-        if(x[0] != '1' and x[0] != '2')return false ;
+        if(x[0] != '1'  and x[0] != '2')return false ;
     }
     return true ;
 }
