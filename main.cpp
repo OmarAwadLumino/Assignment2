@@ -28,7 +28,7 @@ string str_chk(string str){
         for(char i : str) {
             if (!isalpha(i) && i != ' ') {
                 cout << "ENTER VALID ALPHABETIC INPUT : ";
-                cin >> str;
+                getline(cin,str);
                 flag = false;
                 break;
             } else {
@@ -49,7 +49,7 @@ int digits_chk(string num){
             flag = true ;
         }
         if (!flag) {
-            cout << "ENTER VALID INTEGER INPUT : ";
+            cout << "ENTER VALID INPUT : ";
             cin >> num;
         }
     }
@@ -73,7 +73,8 @@ int main()
         }
         int choice_1 = stoi(temp_choice_1);
         if(choice_1 == 2)break ;
-        else{
+        else
+        {
             cout << "================== AFFINE CIPHER ==================\n" ;
             cout << "1 - ENCRYPT TEXT .\n";
             cout << "2 - DECRYPT TEXT .\n";
@@ -96,33 +97,41 @@ int main()
                 if (islower(i))flag = false ;
                 i = toupper(i);
             }
-            string temp_a , temp_b, temp_c ;
-            cout << "ENTER LETTER a IN THE FUNCTION : ";
-            cin >> temp_a ;
-            int a = digits_chk(temp_a) ;
-            cout << "ENTER LETTER b IN THE FUNCTION : ";
-            cin >> temp_b ;
-            int b = digits_chk(temp_b) ;
-            cout << "ENTER LETTER c IN THE FUNCTION : ";
-            cin >> temp_c ;
-            int c = digits_chk(temp_c) ;
-            if(choice_2 == 1){
-                for(char i : text){
-                    ans += encrypt(i, a , b) ;
+            int a , b , c ;
+            while(true)
+            {
+                string temp_a , temp_b, temp_c ;
+                cout << "ENTER THE NUMBER THAT PRESENTS LETTER (a) IN THE FUNCTION : ";
+                cin >> temp_a ;
+                a = digits_chk(temp_a) ;
+                cout << "ENTER THE NUMBER THAT PRESENTS LETTER (b) IN THE FUNCTION : ";
+                cin >> temp_b ;
+                b = digits_chk(temp_b) ;
+                cout << "ENTER THE NUMBER THAT PRESENTS LETTER (c) IN THE FUNCTION : ";
+                cin >> temp_c ;
+                c = digits_chk(temp_c) ;
+                if((a*c)%26 == 1 and !(a < 0 || b < 0 || c < 0 )){
+                    break ;
                 }
-                if(!flag)for (auto& i : ans) {
-                        i = tolower(i);
-                    }
-                cout << "Encrypted Text --->> " << ans << "\n" ;
+                else{
+                    cout << "YOUR INPUT DOES NOT SATISFY THE CONDITION.....!\n";
+                    cout << "you should input three positive integer a , b , c and ((a*c)mod 26) should be equal to 1\n";
+                    cout << "============================================================================================\n";
+                    cout << "Please Enter them again according to the conditions \n" ;
+                    cout << "============================================================================================\n";
+                }
             }
-            else if (choice_2 == 2){
-                for(char i : text){
-                    ans += decrypt(i, c , b) ;
-                }
-                if(!flag)for (auto& i : ans) {
-                        i = tolower(i);
-                    }
-                cout << "Decrypted Text --->> " << ans << "\n" ;
+            if(choice_2 == 1)
+            {
+                for(char i : text) ans += encrypt(i, a , b) ;
+                if(!flag) for(auto &i : ans) i = tolower(i);
+                cout << "Your Encrypted Text --->> " << ans << "\n" ;
+            }
+            else if (choice_2 == 2)
+            {
+                for(char i : text) ans += decrypt(i, c , b) ;
+                if(!flag) for(auto &i : ans) i = tolower(i);
+                cout << "Your Decrypted Text --->> " << ans << "\n" ;
             }
         }
     }
