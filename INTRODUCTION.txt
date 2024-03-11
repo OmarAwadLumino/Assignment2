@@ -1,0 +1,11 @@
+==========================================
+========AFFINE CIPHER APPLICATION=========
+==========================================
+
+                             Program created By : Omar Awad Saber (Lumino)
+
+
+Program is :  
+		Cipher which encrypt the text from certain
+ 		function and decrypt it from another function and
+		the user who determines the numbers in functions which encrypt or decrypt the text
